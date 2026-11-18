@@ -4,6 +4,7 @@ from typing import Optional
 from typing import Union
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.responses import RedirectResponse
 
@@ -22,6 +23,15 @@ from saavn_nn import get_song_details_from_url
 from saavn_nn import search_query
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 task_manager = TaskManager()
 
 
